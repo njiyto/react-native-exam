@@ -4,19 +4,21 @@ import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import DecksScreen from './DecksScreen';
-import AddDecksScreen from './AddDecksScreen';
+import AddDeckScreen from './AddDeckScreen';
 import DeckScreen from './DeckScreen';
-import AddCard from './AddCard';
+import AddCardScreen from './AddCardScreen';
+import QuizScreen from './QuizScreen'
 
 const MainScreen = createBottomTabNavigator({
   Decks: DecksScreen,
-  addDesk: AddDecksScreen,
+  addDesk: AddDeckScreen,
 });
 
 const Screens = createStackNavigator({
-  Main: MainScreen,
+  Decks: MainScreen,
   Deck: DeckScreen,
-  Card: AddCard
+  Card: AddCardScreen,
+  Quiz: QuizScreen
 });
 
 export default createAppContainer(Screens)

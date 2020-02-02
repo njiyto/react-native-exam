@@ -1,20 +1,23 @@
 import { initialData } from '../helpers';
-// import { AsyncStorage } from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage';
+import { AsyncStorage } from 'react-native'
 
-const DATA_KEY = 'DATA_KEY';
-export const ADD_DESKS = 'ADD_DESKS';
+export const DATA_KEY = 'DATA_KEY';
+export const ADD_DECKS = 'ADD_DECKS';
 export const ADD_CARD = 'ADD_CARD';
+export const ADD_DECK = 'ADD_DECK';
+export const DELETE_DECK = 'DELETE_DECK';
+
 
 export const getDecks = () => (
   (dispatch) => {
     AsyncStorage.getItem(DATA_KEY)
       .then(res => {
-        console.log('res', res)
         if (!res) {
           dispatch(addDecks(initialData))
+          AsyncStorage.setItem(DATA_KEY, JSON.stringify(initialData))
         } else {
-          // dispatch(addDecks(res))
+          const data = JSON.parse(res)
+          dispatch(addDecks(data))
         }
       })
   }
@@ -23,10 +26,9 @@ export const getDecks = () => (
 export const addDecks = (data) => (
   (dispatch) => {
     dispatch({
-      type: ADD_DESKS,
+      type: ADD_DECKS,
       data
     })
-    // AsyncStorage.setItem(JSON.stringify(data))
   }
 )
 
@@ -36,6 +38,28 @@ export const addCard = (key, data) => (
       type: ADD_CARD,
       data,
       key
+    })
+  }
+)
+
+export const addDeck = (title) => (
+  (dispatch) => {
+    const data = {
+      title,
+      questions: []
+    }
+    dispatch({
+      type: ADD_DECK,
+      data
+    })
+  }
+)
+
+export const deleteDeck = (title) => (
+  (dispatch) => {
+    dispatch({
+      type: DELETE_DECK,
+      title
     })
   }
 )
