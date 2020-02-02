@@ -59,6 +59,12 @@ const mapStateToProps = (state, {navigation}) => {
 
 DeckScreen.navigationOptions = ({ navigation }) => ({
   title: `${navigation.state.params.key} Deck`,
+  headerLeft: () => (
+    <Button
+      title="< Decks"
+      onPress={() => navigation.navigate('Decks')} 
+    />
+  )
 })
 
 export default connect(mapStateToProps)(DeckScreen)

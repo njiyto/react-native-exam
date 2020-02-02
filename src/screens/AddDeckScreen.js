@@ -14,8 +14,8 @@ const AddDeckScreen = ({ navigation, decks }) => {
       setDeck('')
     } else {
       dispatch(addDeck(deck));
-      setDeck('')
-      navigation.goBack();
+      setDeck('');
+      navigation.navigate('Deck', {key: deck})
     }
   }
 
@@ -47,7 +47,7 @@ const mapStateToProps = (state) => {
 }
 
 AddDeckScreen.navigationOptions = {
-  title: 'Add New Deck',
+  title: 'Add New Deck'
 }
 
 export default connect(mapStateToProps)(AddDeckScreen)
